@@ -310,6 +310,3 @@ Pre-built dashboard includes panels for:
 - Error rate
 - Event loop lag
 
-## License
-
-MIT
