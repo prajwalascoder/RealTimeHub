@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useAuthStore } from '../store/authStore';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, Search, Send, User as UserIcon, MessageSquare, Image as ImageIcon } from 'lucide-react';
+import { LogOut, Search, Send, User as UserIcon, MessageSquare, Image as ImageIcon, ChevronLeft } from 'lucide-react';
 import { api } from '../services/api';
 import { socketService } from '../services/socket';
 
@@ -274,7 +274,7 @@ export default function Dashboard() {
       <div className="glass-panel" style={{ width: '100%', display: 'flex', overflow: 'hidden' }}>
         
         {/* Sidebar */}
-        <div style={{ width: '320px', borderRight: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--glass-bg)' }}>
+        <div className={`chat-sidebar ${activeChat ? 'hidden-on-mobile' : ''}`} style={{ width: '320px', borderRight: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--glass-bg)' }}>
           <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -402,11 +402,19 @@ export default function Dashboard() {
         </div>
 
         {/* Main Chat Area */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(15, 23, 42, 0.4)' }}>
+        <div className={`chat-main ${!activeChat ? 'hidden-on-mobile' : ''}`} style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(15, 23, 42, 0.4)' }}>
           {activeChat ? (
             <>
               {/* Chat Header */}
               <div style={{ padding: '1.25rem 2rem', borderBottom: '1px solid var(--border-color)', backgroundColor: 'var(--glass-bg)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <button 
+                  className="btn btn-secondary mobile-only" 
+                  style={{ padding: '0.5rem', borderRadius: '50%', marginRight: '-0.25rem' }} 
+                  onClick={() => setActiveChat(null)} 
+                  title="Back to chats"
+                >
+                  <ChevronLeft size={20} />
+                </button>
                 <div style={{ width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--primary-glow)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <UserIcon size={20} color="var(--primary)" />
                 </div>

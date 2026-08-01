@@ -218,3 +218,34 @@ a:hover {
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* Mobile Responsive Chat */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0 !important;
+  }
+  .glass-panel {
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  .chat-sidebar {
+    width: 100% !important;
+    border-right: none !important;
+  }
+  .chat-sidebar.hidden-on-mobile {
+    display: none !important;
+  }
+  .chat-main {
+    width: 100% !important;
+  }
+  .chat-main.hidden-on-mobile {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
+}
+
+.mobile-only {
+  display: none;
+}
