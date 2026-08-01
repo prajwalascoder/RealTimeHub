@@ -1,8 +1,6 @@
-version: '3.8'
-
 services:
   backend:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     ports:
@@ -10,9 +8,10 @@ services:
     env_file:
       - .env
     environment:
-      # If running locally, CORS must allow the frontend's exposed port. 
-      # The frontend container is mapped to 5173 to keep it identical to your dev setup.
+      # Override development defaults for local Docker usage
+      - NODE_ENV=production
       - CORS_ORIGIN=http://localhost:5173
+      - LOG_LEVEL=info
     restart: unless-stopped
 
   frontend:

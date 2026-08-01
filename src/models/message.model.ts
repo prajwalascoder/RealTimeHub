@@ -25,13 +25,11 @@ const messageSchema = new Schema<IMessage>(
       type: Schema.Types.ObjectId,
       ref: 'Conversation',
       required: true,
-      index: true,
     },
     sender: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
-      index: true,
     },
     content: {
       type: String,

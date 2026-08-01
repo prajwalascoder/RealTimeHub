@@ -1,4 +1,5 @@
 import swaggerJsdoc from 'swagger-jsdoc';
+import { config } from '../config/index.js';
 
 const options: swaggerJsdoc.Options = {
   definition: {
@@ -12,12 +13,20 @@ const options: swaggerJsdoc.Options = {
         name: 'RealtimeHub',
       },
     },
-    servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Development server',
-      },
-    ],
+    servers:
+      config.NODE_ENV === 'production'
+        ? [
+            {
+              url: '/',
+              description: 'Production server',
+            },
+          ]
+        : [
+            {
+              url: `http://localhost:${config.PORT}`,
+              description: 'Development server',
+            },
+          ],
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -35,7 +44,7 @@ const options: swaggerJsdoc.Options = {
       { name: 'Groups', description: 'Group management endpoints' },
     ],
   },
-  apis: ['./src/routes/*.ts', './dist/routes/*.js'],
+  apis: ['./dist/routes/*.js'],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);

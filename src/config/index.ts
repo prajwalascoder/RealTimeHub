@@ -12,8 +12,12 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z.string().min(1, 'JWT_REFRESH_SECRET is required'),
   JWT_EXPIRY: z.string().default('15m'),
   JWT_REFRESH_EXPIRY: z.string().default('7d'),
-  CORS_ORIGIN: z.string().default('*'),
+  CORS_ORIGIN: z.string().default('*').transform((val) => {
+    if (val === '*') return '*';
+    return val.includes(',') ? val.split(',').map(s => s.trim()) : val;
+  }),
   LOG_LEVEL: z.string().default('info'),
+  METRICS_TOKEN: z.string().optional(),
 });
 
 const parsed = envSchema.safeParse(process.env);
