@@ -14,7 +14,7 @@ const envSchema = z.object({
   JWT_REFRESH_EXPIRY: z.string().default('7d'),
   CORS_ORIGIN: z.string().default('*').transform((val) => {
     if (val === '*') return '*';
-    return val.includes(',') ? val.split(',').map(s => s.trim()) : val;
+    return val.includes(',') ? val.split(',').map(s => s.trim()) : val.trim();
   }),
   LOG_LEVEL: z.string().default('info'),
   METRICS_TOKEN: z.string().optional(),
